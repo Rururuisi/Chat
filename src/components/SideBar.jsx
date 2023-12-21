@@ -1,3 +1,4 @@
+import "../styles/sidebar.scss";
 import React from "react";
 import Navbar from "./Navbar";
 import Avatar from "../img/avatar.jpg";
@@ -11,6 +12,69 @@ function SideBar() {
 			</div>
 			<ul className='user-list'>
 				<li className='user active'>
+					<img src={Avatar} />
+					<span>
+						<p className='username'>monkey99</p>
+						<p className='message'>ok, I'll get back later. </p>
+					</span>
+				</li>
+				<li className='user'>
+					<img src={Avatar} />
+					<span>
+						<p className='username'>monkey99</p>
+						<p className='message'>ok, I'll get back later. </p>
+					</span>
+				</li>
+				<li className='user'>
+					<img src={Avatar} />
+					<span>
+						<p className='username'>monkey99</p>
+						<p className='message'>ok, I'll get back later. </p>
+					</span>
+				</li>
+				<li className='user'>
+					<img src={Avatar} />
+					<span>
+						<p className='username'>monkey99</p>
+						<p className='message'>ok, I'll get back later. </p>
+					</span>
+				</li>
+				<li className='user'>
+					<img src={Avatar} />
+					<span>
+						<p className='username'>monkey99</p>
+						<p className='message'>ok, I'll get back later. </p>
+					</span>
+				</li>
+				<li className='user'>
+					<img src={Avatar} />
+					<span>
+						<p className='username'>monkey99</p>
+						<p className='message'>ok, I'll get back later. </p>
+					</span>
+				</li>
+				<li className='user'>
+					<img src={Avatar} />
+					<span>
+						<p className='username'>monkey99</p>
+						<p className='message'>ok, I'll get back later. </p>
+					</span>
+				</li>
+				<li className='user'>
+					<img src={Avatar} />
+					<span>
+						<p className='username'>monkey99</p>
+						<p className='message'>ok, I'll get back later. </p>
+					</span>
+				</li>
+				<li className='user'>
+					<img src={Avatar} />
+					<span>
+						<p className='username'>monkey99</p>
+						<p className='message'>ok, I'll get back later. </p>
+					</span>
+				</li>
+				<li className='user'>
 					<img src={Avatar} />
 					<span>
 						<p className='username'>monkey99</p>
