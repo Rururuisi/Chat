@@ -1,0 +1,21 @@
+function Login() {
+	return (
+		<div className='form-container'>
+			<div className='form-wrapper'>
+				<div className='logo'> Lama Chat </div>
+				<div className='title'> Login </div>
+				<form>
+					<input type='email' placeholder='email' required />
+					<input type='password' placeholder='password' required />
+					<button type='submit'> Sign In </button>
+				</form>
+				<small>
+					<span>Don't have an account?</span>{" "}
+					<span className='auth-jump'>Register</span>
+				</small>
+			</div>
+		</div>
+	);
+}
+
+export default Login;
