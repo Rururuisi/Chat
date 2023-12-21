@@ -1,9 +1,10 @@
 import React from "react";
 import Add from "../img/add.png";
 import Avatar from "../img/avatar.jpg";
-import More from "../img/more.png";
+import Night from "../img/night.png";
+import Day from "../img/day.png";
 
-function Navbar() {
+function Navbar({ switchMode, isNight = true }) {
 	return (
 		<div className='navbar'>
 			<div className='username'>
@@ -12,6 +13,7 @@ function Navbar() {
 			</div>
 			<div className='btn-group'>
 				<img src={Add} />
+				<img src={isNight ? Day : Night} onClick={switchMode} />
 				<button>Logout</button>
 			</div>
 		</div>

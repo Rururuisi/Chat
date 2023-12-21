@@ -5,14 +5,14 @@ import Attach from "../img/attach.png";
 
 function ChatTextToolbar() {
 	return (
-		<div className='chat-text-toolbar'>
+		<form className='chat-text-toolbar'>
 			<ChatTextArea />
 			<div className='btn-group'>
 				<img src={Img} />
 				<img src={Attach} />
-				<button>Send</button>
+				<button type='submit'>Send</button>
 			</div>
-		</div>
+		</form>
 	);
 }
 
