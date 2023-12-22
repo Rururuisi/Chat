@@ -2,6 +2,7 @@ import { app } from "./firebase.config";
 import {
 	getAuth,
 	createUserWithEmailAndPassword,
+	onAuthStateChanged,
 	updateProfile,
 } from "firebase/auth";
 import { addUserToDoc, addUserChatToDoc } from "./firebase.firestore.js";
@@ -32,6 +33,9 @@ const createUser = async (displayName, email, password, avatar) => {
 	}
 };
 
+const onAuthStateChangedListener = (callback) =>
+	onAuthStateChanged(auth, callback);
+
 const updateUserProfile = async (userInfo) => {
 	try {
 		await updateProfile(auth.currentUser, userInfo);
@@ -40,4 +44,4 @@ const updateUserProfile = async (userInfo) => {
 	}
 };
 
-export { auth, createUser, updateUserProfile };
+export { auth, createUser, updateUserProfile, onAuthStateChangedListener };

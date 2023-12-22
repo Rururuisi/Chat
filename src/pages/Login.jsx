@@ -1,9 +1,18 @@
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../contexts/auth.context";
 
 function Login() {
+	const { currentUser } = useContext(AuthContext);
 	const navigate = useNavigate();
 
-	const submitHandler = (evt) => {
+	useEffect(() => {
+		if (currentUser) {
+			navigate("/");
+		}
+	}, []);
+
+	const signIn = (evt) => {
 		navigate("/");
 	};
 
@@ -12,7 +21,7 @@ function Login() {
 			<div className='form-wrapper'>
 				<div className='logo'> Lama Chat </div>
 				<div className='title'> Login </div>
-				<form onSubmit={submitHandler}>
+				<form onSubmit={signIn}>
 					<input type='email' placeholder='email' required />
 					<input type='password' placeholder='password' required />
 					<button type='submit'> Sign In </button>

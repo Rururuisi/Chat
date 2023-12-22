@@ -3,10 +3,10 @@ import React from "react";
 import Navbar from "./Sidebar.navbar";
 import Avatar from "../img/avatar.jpg";
 
-function Sidebar({ sitchMode, isNight }) {
+function Sidebar() {
 	return (
 		<div className='sidebar'>
-			<Navbar switchMode={sitchMode} isNight={isNight} />
+			<Navbar />
 			<div className='search'>
 				<input type='search' placeholder='Find a user' />
 			</div>

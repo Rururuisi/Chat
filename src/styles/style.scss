@@ -211,6 +211,10 @@ input:focus, textarea:focus, button:focus {
 					background-color: #000;
 					border-radius: 50%;
 				}
+
+				.avatar {
+					cursor: pointer;
+				}
 			}
 
 			.btn-group {
