@@ -51,7 +51,7 @@
 						
 						.picture {
 							margin-top: 10px;
-							width: 100px;
+							max-height: 200px;
 						}
 					}
 				}
@@ -87,7 +87,7 @@
 
 		.chat-textarea {
 			position: relative;
-			flex: 4;
+			flex: 6;
 			
 			.textarea {
 				opacity: 0;
@@ -127,16 +127,28 @@
 			justify-content: flex-end;
 			align-items: end;
 			gap: 10px;
-			padding: 0 10px 16px 0;
+			padding: 0 20px 15px 0;
 			flex: 1;
 			height: 100%;
 
 			img {
-				width: 30px;
+				height: 30px;
 
 				&:hover {
 					scale: 1.1;
 					cursor: pointer;
+				}
+			}
+
+			.send {
+				scale: 1.1;
+
+				&:hover {
+					scale: 1.2;
+				}
+
+				&:active {
+					scale: 1.0;
 				}
 			}
 

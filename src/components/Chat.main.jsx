@@ -1,13 +1,13 @@
 import "../styles/chat.scss";
 import React from "react";
-import ChatTopBar from "./ChatTopBar";
-import ChatWindow from "./ChatWindow";
-import ChatTextToolbar from "./ChatTextToolbar";
+import ChatNavbar from "./Chat.navbar";
+import ChatWindow from "./Chat.window";
+import ChatTextToolbar from "./Chat.textToolbar";
 
 function Chat() {
 	return (
 		<div className='chat'>
-			<ChatTopBar />
+			<ChatNavbar />
 			<ChatWindow />
 			<ChatTextToolbar />
 		</div>

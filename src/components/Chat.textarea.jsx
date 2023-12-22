@@ -1,6 +1,6 @@
 import React, { useState, Fragment } from "react";
 
-function ChatTextArea() {
+function ChatTextarea() {
 	const [text, setText] = useState([]);
 
 	const changeHandler = (evt) => {
@@ -27,4 +27,4 @@ function ChatTextArea() {
 	);
 }
 
-export default ChatTextArea;
+export default ChatTextarea;

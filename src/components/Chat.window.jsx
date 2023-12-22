@@ -1,5 +1,5 @@
 import React from "react";
-import Messages from "./Messages";
+import Messages from "./Chat.messages";
 
 function ChatWindow() {
 	return (

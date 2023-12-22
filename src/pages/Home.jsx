@@ -1,5 +1,5 @@
-import SideBar from "../components/SideBar";
-import Chat from "../components/Chat";
+import Sidebar from "../components/Sidebar.main";
+import Chat from "../components/Chat.main";
 import { useState } from "react";
 
 function Home() {
@@ -10,7 +10,7 @@ function Home() {
 	return (
 		<div className='home' id={`${onNight ? "" : "light"}`}>
 			<div className='container'>
-				<SideBar sitchMode={switchMode} isNight={onNight} />
+				<Sidebar sitchMode={switchMode} isNight={onNight} />
 				<Chat />
 			</div>
 		</div>

@@ -1,3 +1,23 @@
+@mixin mobile {
+	@media screen and (max-width: 480px) {
+		@content;
+	}
+}
+
+@mixin tablet {
+	@media screen and (max-width: 768px) {
+		@content;
+	}
+}
+
+@mixin labtop {
+	@media screen and (max-width: 1200px) {
+		@content;
+	}
+}
+
+
+
 * {
 	padding: 0;
 	margin: 0;
@@ -13,7 +33,7 @@ body {
 	align-items: center;
 	width: 100vw;
 	height: 100vh;
-	background: linear-gradient(#472ea3, #672baa, #3d2e9ae3) no-repeat;
+	background: linear-gradient(#3127be, #7d58c2, #3127be) no-repeat;
 }
 
 input:focus, textarea:focus, button:focus {
@@ -24,13 +44,133 @@ input:focus, textarea:focus, button:focus {
 	display: none;
 }
 
+
+// -----------------------Register & Login-------------------------
+
+.form-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100vw;
+	height: 100vh;
+	padding: 30px;
+
+	.form-wrapper {
+		padding: 20px 40px;
+		width: 100%;
+		max-width: 400px;
+		text-align: center;
+		border-radius: 10px;
+		background-color: #333;
+		box-shadow: 0px 0px 30px rgb(68, 19, 147);
+
+		div {
+			margin-bottom: 10px;
+		}
+		
+		.logo {
+			color: #fff;
+			font-size: 24px;
+			font-weight: 600;
+		}
+
+		.title {
+			margin-bottom: 15px;
+			font-size: 14px;
+			color: #ddd;
+		}
+
+		form {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			gap: 15px;
+
+			input {
+				display: block;
+				padding: 10px;
+				width: 100%;
+				height: 40px;
+				border: none;
+				color: #333;
+				font-size: 16px;
+				border-radius: 5px;
+				border-bottom: 1px solid #aaa;
+
+				&::placeholder {
+					color: #888;
+				}
+			}
+
+			#file {
+				display: none;
+			}
+
+			.avatar-btn {
+				display: flex;
+				align-items: center;
+				gap: 10px;
+				width: 100%;
+				cursor: pointer;
+
+				img {
+					width: 40px;
+				}
+
+				span {
+					font-size: 14px;
+					color: #ccc;
+				}
+
+				&:hover span{
+					color: #aaa;
+				}
+			}
+
+
+			button {
+				margin: 15px 0;
+				width: 100%;
+				height: 40px;
+				border: none;
+				color: #fff;
+				border-radius: 5px;
+				background-color: #6d619c;
+				cursor: pointer;
+
+				&:hover {
+					background-color: #524684;
+				}
+			}
+		}
+
+		small {
+			color: #eee;
+
+			.auth-jump {
+				text-decoration: underline;
+				color: yellow;
+				cursor: pointer;
+			}
+		}
+	}
+}
+
+
+
 // --------------------------Home--------------------------
 
 .home {
 	width: 100vw;
 	height: 100vh;
-	padding: 60px 120px;
+	padding: 20px 60px;
 	color: #fff;
+
+	@include labtop {
+		padding: 0;
+		background: #2a2a2a;
+	}
 
 	.container {
 		display: flex;
@@ -41,7 +181,7 @@ input:focus, textarea:focus, button:focus {
 		box-shadow: 0px 0px 30px rgb(68, 19, 147);
 		overflow: hidden;
 
-		.navbar, .chat-top-bar {
+		.sidebar-navbar, .chat-navbar {
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
@@ -54,6 +194,16 @@ input:focus, textarea:focus, button:focus {
 				display: flex;
 				align-items: center;
 				gap: 10px;
+
+				.btn {
+					height: 30px;
+					background-color: transparent;
+					cursor: pointer;
+
+					&:hover {
+						scale: 1.1;
+					}
+				}
 
 				img {
 					width: 30px;
@@ -102,213 +252,3 @@ input:focus, textarea:focus, button:focus {
 }
 
 
-// ------------------------Light Mode-------------------------
-
-
-body:has(#light){
-	background: #acbbf8;
-
-	.container {
-		box-shadow: none;
-
-	}
-
-	#light {
-		.sidebar {
-			background-color: #eee;
-			border-right: 1px solid #eee;
-
-			.navbar {
-				background-color: #382e60;
-			}
-
-			.search input {
-				color: #333;
-				background-color: #e2e1e7;
-				caret-color: #333;
-
-				&::placeholder {
-					color: #888;
-				}
-			}
-
-			.user-list .user {
-				color: #000;
-				background-color: #eee;
-
-				&:hover {
-					background-color: #d7d6dc;
-					cursor: pointer;
-				}
-
-				.message {
-					color: #555;
-				}
-			}
-
-			.user-list .active {
-				color: #000;
-				background-color: #d7d6dc;
-
-				.message {
-					color: #555;
-				}
-			}
-		}
-
-		.chat {
-			.chat-top-bar {
-				background-color: #382e60;
-			}
-
-			.chat-window {
-				background-color: #dddde3;
-
-				.container {
-					background-color: #dddde3;
-				}
-			}
-
-			.chat-text-toolbar {
-				background-color: #382e60;
-				
-				textarea {
-					color: #000;
-					background-color: #fff;
-					caret-color: #000;
-				}
-
-				.btn-group button {
-					color: #543277;
-					background-color: #fff;
-
-					&:hover {
-						scale: 1.1;
-					}
-				}
-			}
-
-			.time {
-				color: black;
-			}
-		}
-	}
-}
-
-
-
-// -----------------------Register & Login-------------------------
-
-.form-container {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 100vw;
-	height: 100vh;
-	padding: 30px;
-
-	.form-wrapper {
-		padding: 20px 40px;
-		width: 100%;
-		max-width: 400px;
-		text-align: center;
-		border-radius: 10px;
-		background-color: #fff;
-		box-shadow: 0px 0px 30px rgb(68, 19, 147);
-
-		div {
-			margin-bottom: 10px;
-		}
-		
-		.logo {
-			color: #555;
-			font-size: 24px;
-			font-weight: 600;
-		}
-
-		.title {
-			margin-bottom: 15px;
-			font-size: 14px;
-			color: #666;
-		}
-
-		form {
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			align-items: center;
-			gap: 15px;
-
-			input {
-				display: block;
-				padding: 10px;
-				width: 100%;
-				height: 40px;
-				border: none;
-				color: #333;
-				font-size: 14px;
-				border-radius: 5px;
-				border-bottom: 1px solid #aaa;
-
-				&::placeholder {
-					color: #aaa;
-				}
-
-				&:focus {
-					outline: 2px solid rgb(71, 32, 200);
-				}
-			}
-
-			#file {
-				display: none;
-			}
-
-			.avatar-btn {
-				display: flex;
-				align-items: center;
-				gap: 10px;
-				width: 100%;
-				cursor: pointer;
-
-				img {
-					width: 32px;
-				}
-
-				span {
-					font-size: 14px;
-					color: #aaa;
-				}
-
-				&:hover span{
-					color: #888;
-				}
-			}
-
-
-			button {
-				margin: 15px 0;
-				width: 100%;
-				height: 40px;
-				border: none;
-				color: #fff;
-				border-radius: 5px;
-				background-color: #5a32dc;
-				cursor: pointer;
-
-				&:hover {
-					background-color: #3e1dab;
-				}
-			}
-		}
-
-		small {
-			color: #666;
-
-			.auth-jump {
-				text-decoration: underline;
-				color: blue;
-				cursor: pointer;
-			}
-		}
-	}
-}

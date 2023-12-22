@@ -1,9 +1,9 @@
 import "../styles/sidebar.scss";
 import React from "react";
-import Navbar from "./Navbar";
+import Navbar from "./Sidebar.navbar";
 import Avatar from "../img/avatar.jpg";
 
-function SideBar({ sitchMode, isNight }) {
+function Sidebar({ sitchMode, isNight }) {
 	return (
 		<div className='sidebar'>
 			<Navbar switchMode={sitchMode} isNight={isNight} />
@@ -100,4 +100,4 @@ function SideBar({ sitchMode, isNight }) {
 	);
 }
 
-export default SideBar;
+export default Sidebar;

@@ -6,7 +6,7 @@ import Day from "../img/day.png";
 
 function Navbar({ switchMode, isNight = true }) {
 	return (
-		<div className='navbar'>
+		<div className='sidebar-navbar'>
 			<div className='username'>
 				<img src={Avatar} />
 				<span>yyds9943</span>
