@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import AddAvatar from "../img/addAvatar.png";
 import { createUser } from "../firebase/firebase.auth";
+import AddAvatar from "../img/addAvatar.png";
 
 function Register() {
 	const navigate = useNavigate();
@@ -14,8 +14,6 @@ function Register() {
 
 		try {
 			await createUser(displayName, email, password, avatar);
-			alert("Sucessfully register! ");
-			navigate("/");
 		} catch (err) {
 			alert(err.message);
 			evt.target[2].value = "";

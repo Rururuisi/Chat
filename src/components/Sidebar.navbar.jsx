@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../contexts/auth.context";
 import { ThemeContext } from "../contexts/theme.context";
-import { useNavigate } from "react-router-dom";
+import { signOutUser } from "../firebase/firebase.auth";
 import Add from "../img/add.png";
 import Avatar from "../img/avatar.jpg";
 import Night from "../img/night.png";
@@ -10,11 +10,6 @@ import Day from "../img/day.png";
 function Navbar() {
 	const { currentUser } = useContext(AuthContext);
 	const { onNightMode, switchMode } = useContext(ThemeContext);
-	const navigate = useNavigate();
-
-	const signOut = () => {
-		navigate("/login");
-	};
 
 	return (
 		<div className='sidebar-navbar'>
@@ -25,7 +20,7 @@ function Navbar() {
 			<div className='btn-group'>
 				<img src={Add} />
 				<img src={onNightMode ? Day : Night} onClick={switchMode} />
-				<button onClick={signOut}>Logout</button>
+				<button onClick={signOutUser}>Logout</button>
 			</div>
 		</div>
 	);

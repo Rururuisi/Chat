@@ -1,16 +1,7 @@
-import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../contexts/auth.context";
 
 function Login() {
-	const { currentUser } = useContext(AuthContext);
 	const navigate = useNavigate();
-
-	useEffect(() => {
-		if (currentUser) {
-			navigate("/");
-		}
-	}, []);
 
 	const signIn = (evt) => {
 		navigate("/");

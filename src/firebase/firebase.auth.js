@@ -1,6 +1,7 @@
 import { app } from "./firebase.config";
 import {
 	getAuth,
+	signOut,
 	createUserWithEmailAndPassword,
 	onAuthStateChanged,
 	updateProfile,
@@ -33,6 +34,10 @@ const createUser = async (displayName, email, password, avatar) => {
 	}
 };
 
+const signOutUser = () => {
+	signOut(auth);
+};
+
 const onAuthStateChangedListener = (callback) =>
 	onAuthStateChanged(auth, callback);
 
@@ -44,4 +49,10 @@ const updateUserProfile = async (userInfo) => {
 	}
 };
 
-export { auth, createUser, updateUserProfile, onAuthStateChangedListener };
+export {
+	auth,
+	createUser,
+	signOutUser,
+	updateUserProfile,
+	onAuthStateChangedListener,
+};
