@@ -1,7 +1,10 @@
+import { useNavigate } from "react-router-dom";
 import AddAvatar from "../img/addAvatar.png";
 import { createUser } from "../firebase/firebase.auth";
 
 function Register() {
+	const navigate = useNavigate();
+
 	const submitHandler = async (evt) => {
 		evt.preventDefault();
 		const displayName = evt.target[0].value;
@@ -12,6 +15,7 @@ function Register() {
 		try {
 			await createUser(displayName, email, password, avatar);
 			alert("Sucessfully register! ");
+			navigate("/");
 		} catch (err) {
 			alert(err.message);
 			evt.target[2].value = "";
@@ -42,7 +46,11 @@ function Register() {
 				</form>
 				<small>
 					<span>Already have an account?</span>{" "}
-					<span className='auth-jump'>Login</span>
+					<span
+						className='auth-jump'
+						onClick={() => navigate("/login")}>
+						Login
+					</span>
 				</small>
 			</div>
 		</div>

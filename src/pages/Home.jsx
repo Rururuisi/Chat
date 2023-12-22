@@ -1,6 +1,6 @@
+import { useState } from "react";
 import Sidebar from "../components/Sidebar.main";
 import Chat from "../components/Chat.main";
-import { useState } from "react";
 
 function Home() {
 	const [onNight, setOnNight] = useState(true);

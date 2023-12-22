@@ -53,48 +53,6 @@ function Sidebar({ sitchMode, isNight }) {
 						<p className='message'>ok, I'll get back later. </p>
 					</span>
 				</li>
-				<li className='user'>
-					<img src={Avatar} />
-					<span>
-						<p className='username'>monkey99</p>
-						<p className='message'>ok, I'll get back later. </p>
-					</span>
-				</li>
-				<li className='user'>
-					<img src={Avatar} />
-					<span>
-						<p className='username'>monkey99</p>
-						<p className='message'>ok, I'll get back later. </p>
-					</span>
-				</li>
-				<li className='user'>
-					<img src={Avatar} />
-					<span>
-						<p className='username'>monkey99</p>
-						<p className='message'>ok, I'll get back later. </p>
-					</span>
-				</li>
-				<li className='user'>
-					<img src={Avatar} />
-					<span>
-						<p className='username'>monkey99</p>
-						<p className='message'>ok, I'll get back later. </p>
-					</span>
-				</li>
-				<li className='user'>
-					<img src={Avatar} />
-					<span>
-						<p className='username'>monkey99</p>
-						<p className='message'>ok, I'll get back later. </p>
-					</span>
-				</li>
-				<li className='user'>
-					<img src={Avatar} />
-					<span>
-						<p className='username'>monkey99</p>
-						<p className='message'>ok, I'll get back later. </p>
-					</span>
-				</li>
 			</ul>
 		</div>
 	);

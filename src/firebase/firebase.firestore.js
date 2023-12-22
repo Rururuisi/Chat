@@ -1,6 +1,6 @@
 import { app } from "./firebase.config";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
-import catchFirebaseError from "./filebase.error";
+import { dbErrorHandler } from "./filebase.error";
 
 // Initialize Cloud Firestore and get a reference to the service
 const db = getFirestore(app);
@@ -16,16 +16,16 @@ const addUserToDoc = async (user) => {
 			photoURL,
 		});
 	} catch (err) {
-		catchFirebaseError(err);
+		dbErrorHandler(err);
 	}
 };
 
 const addUserChatToDoc = async (userId, userChat) => {
 	try {
-		await setDoc(doc(db, "userChats", userId), userChat);
+		await setDoc(doc(db, "chats", userId), userChat);
 	} catch (err) {
-		catchFirebaseError(err);
+		dbErrorHandler(err);
 	}
 };
 
-export { addUserToDoc };
+export { addUserToDoc, addUserChatToDoc };

@@ -1,13 +1,7 @@
 import { app } from "./firebase.config";
-import {
-	getStorage,
-	ref,
-	uploadBytesResumable,
-	getDownloadURL,
-	uploadBytes,
-} from "firebase/storage";
+import { getStorage, ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import { updateUserProfile } from "./firebase.auth";
-import catchFirebaseError from "./filebase.error";
+import { storageErrorHandler } from "./filebase.error";
 
 // Initialize Cloud Storage and get a reference to the service
 const storageRef = ref(getStorage(app), "user-assets");
@@ -19,7 +13,7 @@ const uploadAvatar = async (uid, file) => {
 		const url = await processUpload(avatarsRef, file);
 		return url;
 	} catch (err) {
-		catchFirebaseError(err);
+		storageErrorHandler(err);
 	}
 };
 
@@ -30,7 +24,7 @@ const processUpload = async (storageRef, file) => {
 		await updateUserProfile({ photoURL: url });
 		return url;
 	} catch (err) {
-		catchFirebaseError(err);
+		storageErrorHandler(err);
 	}
 };
 

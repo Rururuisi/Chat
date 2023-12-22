@@ -7,6 +7,13 @@ function ChatTextarea() {
 		setText((evt.target.value + " ").split(/(\n)/g));
 	};
 
+	const keyDownHandler = (evt) => {
+		if (evt.key === "Enter" && !evt.shiftKey) {
+			evt.preventDefault();
+			document.querySelector("#send-message").click();
+		}
+	};
+
 	return (
 		<div className='chat-textarea'>
 			<div className='textarea'>
@@ -21,7 +28,11 @@ function ChatTextarea() {
 				)}
 			</div>
 			<div className='textarea-box'>
-				<textarea rows={1} onChange={changeHandler} />
+				<textarea
+					rows={1}
+					onChange={changeHandler}
+					onKeyDown={keyDownHandler}
+				/>
 			</div>
 		</div>
 	);

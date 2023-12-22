@@ -3,11 +3,10 @@ import {
 	getAuth,
 	createUserWithEmailAndPassword,
 	updateProfile,
-	AuthErrorCodes,
 } from "firebase/auth";
-import { addUserToDoc } from "./firebase.firestore.js";
+import { addUserToDoc, addUserChatToDoc } from "./firebase.firestore.js";
 import { uploadAvatar } from "./firebase.storage.js";
-import catchFirebaseError from "./filebase.error.js";
+import { authErrorHandler } from "./filebase.error.js";
 
 // Email Password Authentication
 const auth = getAuth(app);
@@ -26,18 +25,10 @@ const createUser = async (displayName, email, password, avatar) => {
 		user.displayName = displayName;
 		await updateUserProfile(user);
 		await addUserToDoc(user);
+		await addUserChatToDoc(user.uid, {});
 		return user;
 	} catch (err) {
-		if (err.code === AuthErrorCodes.EMAIL_EXISTS) {
-			catchFirebaseError(err, "Email already in use! ");
-		} else if (err.code === AuthErrorCodes.WEAK_PASSWORD) {
-			catchFirebaseError(
-				err,
-				"Password should be at least 6 characters! "
-			);
-		} else {
-			catchFirebaseError(err);
-		}
+		authErrorHandler(err);
 	}
 };
 
@@ -49,4 +40,4 @@ const updateUserProfile = async (userInfo) => {
 	}
 };
 
-export { createUser, updateUserProfile };
+export { auth, createUser, updateUserProfile };
