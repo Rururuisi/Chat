@@ -8,6 +8,9 @@ import {
 	where,
 	getDocs,
 	getDoc,
+	updateDoc,
+	serverTimestamp,
+	onSnapshot,
 } from "firebase/firestore";
 import { dbErrorHandler, storageErrorHandler } from "./filebase.error";
 
@@ -29,7 +32,7 @@ const addUserToDoc = async (user) => {
 	}
 };
 
-const addUserChatToDoc = async (userId, userChat) => {
+const addUserChatToDoc = async (userId, userChat = {}) => {
 	try {
 		await setDoc(doc(db, "userChats", userId), userChat);
 	} catch (err) {
@@ -37,7 +40,7 @@ const addUserChatToDoc = async (userId, userChat) => {
 	}
 };
 
-const addChatToDoc = async (chatId, chat) => {
+const addChatToDoc = async (chatId, chat = { messages: [] }) => {
 	try {
 		await setDoc(doc(db, "chats", chatId), chat);
 	} catch (err) {
@@ -46,19 +49,23 @@ const addChatToDoc = async (chatId, chat) => {
 };
 
 const searchMatchUsers = async (displayName) => {
+	return await searchMatchData("users", "displayName", displayName);
+};
+
+const searchMatchData = async (collectionName, field, displayName) => {
 	try {
 		const q = query(
-			collection(db, "users"),
-			where("displayName", "==", displayName)
+			collection(db, collectionName),
+			where(field, "==", displayName)
 		);
 		const snapshot = await getDocs(q);
-		const users = [];
+		const data = [];
 
 		snapshot.forEach((doc) => {
-			users.push(doc.data());
+			data.push(doc.data());
 		});
 
-		return users;
+		return data;
 	} catch (err) {
 		storageErrorHandler(err);
 	}
@@ -79,6 +86,26 @@ const findDocData = async (collectionName, uid) => {
 	}
 };
 
+const updateUserChatsDoc = async (
+	currentUserId,
+	{ chatId, userId, displayName, photoURL }
+) => {
+	await updateDoc(doc(db, "userChats", currentUserId), {
+		[`${chatId}.userInfo`]: {
+			uid: userId,
+			displayName,
+			photoURL,
+		},
+		[`${chatId}.date`]: serverTimestamp(),
+	});
+};
+
+const onUserChatsSnapshotListener = (currentUserId, callback) =>
+	onSnapshot(doc(db, "userChats", currentUserId), callback);
+
+const onChatsSnapshotListener = (chatId, callback) =>
+	onSnapshot(doc(db, "chats", chatId), callback);
+
 const combineId = (uid1, uid2) => {
 	return uid1 > uid2 ? uid1 + uid2 : uid2 + uid1;
 };
@@ -89,12 +116,34 @@ export {
 	addChatToDoc,
 	searchMatchUsers,
 	findDocData,
+	updateUserChatsDoc,
+	onUserChatsSnapshotListener,
+	onChatsSnapshotListener,
 	combineId,
 };
 
 /**
- * Data:
- * 1. users - collection of users, user's id -> user's id and info
- * 2. userChats - collection of the chats of each users (similar to friend list of each user), user's id -> other users' id and chat id of them
- * 3. chats - collection of all chats (chats of all the users), chat's id -> [user1's id and message, user2's id and message, ...]
+ *  Data:
+ *  1. users - collection of users, user's id -> user's id and info
+ * 		currentUser's uid ->
+ * 		{ displayName, email, photoURL, uid }
+ *
+ *  2. userChats - collection of the chats of each users (similar to friend list of each user)
+ * 		currentUser's uid ->
+ * 		{ user1's uid: {
+ * 				userInfo: {displayName, photoURL, uid},
+ * 				lastMessage: "",
+ * 				date: ""
+ * 			}
+ * 		}
+ *
+ *
+ *  3. chats - collection of all chats (chats of all the users)
+ * 		combineID of all users' ids in the chat (chatId) ->
+ * 		{ message: [
+ * 				{displayName, messageType, message, time},
+ * 				{displayName, messageType, message, time},
+ * 				...
+ * 		 	]
+ * 		}
  */

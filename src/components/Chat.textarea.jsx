@@ -1,12 +1,6 @@
 import React, { useState, Fragment } from "react";
 
-function ChatTextarea() {
-	const [text, setText] = useState([]);
-
-	const changeHandler = (evt) => {
-		setText((evt.target.value + " ").split(/(\n)/g));
-	};
-
+function ChatTextarea({ text = [], changeHandler }) {
 	const keyDownHandler = (evt) => {
 		if (evt.key === "Enter" && !evt.shiftKey) {
 			evt.preventDefault();

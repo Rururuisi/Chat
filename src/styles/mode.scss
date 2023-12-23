@@ -44,17 +44,31 @@ body:has(#light){
 				}
 			}
 
-			.user-list .active {
+			.user-list.search {
+				border-bottom: 1px solid #ccc;
+			}
+
+			.user-list.chatlist {
+				.user {
+					cursor: pointer;
+
+					&:hover {
+						background-color: #ddd;
+					}
+				}
+			}
+
+			.user-list .user.active {
 				color: #000;
-				background-color: #d7d6dc;
+				background-color: #ccc;
+				
+				&:hover {
+					background-color: #ccc;
+				}
 
 				.message {
 					color: #555;
 				}
-			}
-
-			.user-list.search {
-				border-bottom: 1px solid #ccc;
 			}
 		}
 

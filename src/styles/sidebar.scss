@@ -105,15 +105,30 @@
 					}
 				}
 			}
-	
-			.active {
-				background-color: #5d546e;
-			}
 		}
 	
 		.user-list.search {
 			height: unset;
+			margin-bottom: 4px;
 			border-bottom: 1px solid #555;
+		}
+
+		.user-list.chatlist {
+			.user{
+				cursor: pointer;
+				
+				&:hover {
+					background-color: #333;
+				}
+			}
+
+			.active {
+				background-color: #5d546e;
+
+				&:hover {
+					background-color: #5d546e;
+				}
+			}
 		}
 	}
 }

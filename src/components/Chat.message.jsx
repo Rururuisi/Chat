@@ -1,7 +1,7 @@
 import React from "react";
 import Avatar from "../img/avatar.jpg";
 
-function Message({ isReceiver = false }) {
+function Message({ message, isReceiver = false }) {
 	return (
 		<div className={`message ${isReceiver ? "receiver" : ""}`}>
 			<img className='avatar' src={Avatar} />
