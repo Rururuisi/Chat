@@ -1,10 +1,8 @@
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { createUser } from "../firebase/firebase.auth";
 import AddAvatar from "../img/addAvatar.png";
 
 function Register() {
-	const navigate = useNavigate();
-
 	const submitHandler = async (evt) => {
 		evt.preventDefault();
 		const displayName = evt.target[0].value;
@@ -44,11 +42,9 @@ function Register() {
 				</form>
 				<small>
 					<span>Already have an account?</span>{" "}
-					<span
-						className='auth-jump'
-						onClick={() => navigate("/login")}>
+					<Link className='auth-jump' to='/login'>
 						Login
-					</span>
+					</Link>
 				</small>
 			</div>
 		</div>

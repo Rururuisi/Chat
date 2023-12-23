@@ -1,10 +1,18 @@
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { signInUser } from "../firebase/firebase.auth";
 
 function Login() {
-	const navigate = useNavigate();
+	const signIn = async (evt) => {
+		evt.preventDefault();
+		const email = evt.target[0].value;
+		const password = evt.target[1].value;
 
-	const signIn = (evt) => {
-		navigate("/");
+		try {
+			await signInUser(email, password);
+		} catch (err) {
+			alert(err.message);
+			evt.target[1].focus();
+		}
 	};
 
 	return (
@@ -19,11 +27,9 @@ function Login() {
 				</form>
 				<small>
 					<span>Don't have an account?</span>{" "}
-					<span
-						className='auth-jump'
-						onClick={() => navigate("/register")}>
+					<Link className='auth-jump' to='/register'>
 						Register
-					</span>
+					</Link>
 				</small>
 			</div>
 		</div>

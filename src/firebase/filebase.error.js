@@ -17,6 +17,8 @@ const authErrorHandler = (err) => {
 		catchFirebaseError(err, "Email already in use! ");
 	} else if (err.code === AuthErrorCodes.WEAK_PASSWORD) {
 		catchFirebaseError(err, "Password should be at least 6 characters! ");
+	} else if (err.code === AuthErrorCodes.INVALID_LOGIN_CREDENTIALS) {
+		catchFirebaseError(err, "Invalid email or password! ");
 	} else {
 		catchFirebaseError(err);
 	}

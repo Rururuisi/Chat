@@ -28,17 +28,19 @@ body:has(#light){
 				}
 			}
 
-			.user-list .user {
-				color: #000;
-				background-color: #eee;
-
-				&:hover {
-					background-color: #d7d6dc;
-					cursor: pointer;
+			.user-list{
+				.empty-list, .not-found {
+					color: #aaa;
 				}
-
-				.message {
-					color: #555;
+				
+				.user {
+					color: #000;
+					background-color: transparent;
+					cursor: default;
+	
+					.message {
+						color: #555;
+					}
 				}
 			}
 
@@ -49,6 +51,10 @@ body:has(#light){
 				.message {
 					color: #555;
 				}
+			}
+
+			.user-list.search {
+				border-bottom: 1px solid #ccc;
 			}
 		}
 

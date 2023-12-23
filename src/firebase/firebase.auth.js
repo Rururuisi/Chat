@@ -1,8 +1,9 @@
 import { app } from "./firebase.config";
 import {
 	getAuth,
-	signOut,
 	createUserWithEmailAndPassword,
+	signInWithEmailAndPassword,
+	signOut,
 	onAuthStateChanged,
 	updateProfile,
 } from "firebase/auth";
@@ -34,6 +35,19 @@ const createUser = async (displayName, email, password, avatar) => {
 	}
 };
 
+const signInUser = async (email, password) => {
+	try {
+		const userCredential = await signInWithEmailAndPassword(
+			auth,
+			email,
+			password
+		);
+		return userCredential.user;
+	} catch (err) {
+		authErrorHandler(err);
+	}
+};
+
 const signOutUser = () => {
 	signOut(auth);
 };
@@ -45,13 +59,14 @@ const updateUserProfile = async (userInfo) => {
 	try {
 		await updateProfile(auth.currentUser, userInfo);
 	} catch (err) {
-		catchFirebaseError(err);
+		authErrorHandler(err);
 	}
 };
 
 export {
 	auth,
 	createUser,
+	signInUser,
 	signOutUser,
 	updateUserProfile,
 	onAuthStateChangedListener,

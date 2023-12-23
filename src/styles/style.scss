@@ -213,7 +213,13 @@ input:focus, textarea:focus, button:focus {
 				}
 
 				.avatar {
+					width: 40px;
+					height: 40px;
 					cursor: pointer;
+					
+					&:hover {
+						scale: 1.1;
+					}
 				}
 			}
 

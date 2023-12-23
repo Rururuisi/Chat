@@ -15,40 +15,43 @@ function App() {
 		return element;
 	};
 
+	const HomeNavigator = () => {
+		return (
+			<ProtectedRoute
+				condition={!currentUser}
+				path={"/login"}
+				element={<Home />}
+			/>
+		);
+	};
+
+	const LoginNavigator = () => {
+		return (
+			<ProtectedRoute
+				condition={currentUser}
+				path={"/"}
+				element={<Login />}
+			/>
+		);
+	};
+
+	const RegisterNavigator = () => {
+		return (
+			<ProtectedRoute
+				condition={currentUser}
+				path={"/"}
+				element={<Register />}
+			/>
+		);
+	};
+
 	return (
 		<BrowserRouter>
 			<Routes>
 				<Route path='/'>
-					<Route
-						index
-						element={
-							<ProtectedRoute
-								condition={!currentUser}
-								path={"/login"}
-								element={<Home />}
-							/>
-						}
-					/>
-					<Route
-						path='login'
-						element={
-							<ProtectedRoute
-								condition={currentUser}
-								path={"/"}
-								element={<Login />}
-							/>
-						}
-					/>
-					<Route
-						path='register'
-						element={
-							<ProtectedRoute
-								condition={currentUser}
-								path={"/"}
-								element={<Register />}
-							/>
-						}
-					/>
+					<Route index element={<HomeNavigator />} />
+					<Route path='login' element={<LoginNavigator />} />
+					<Route path='register' element={<RegisterNavigator />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>

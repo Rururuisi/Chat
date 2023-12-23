@@ -1,59 +1,47 @@
 import "../styles/sidebar.scss";
-import React from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../contexts/auth.context";
+import { searchMatchUsers } from "../firebase/firebase.firestore";
 import Navbar from "./Sidebar.navbar";
-import Avatar from "../img/avatar.jpg";
+import ChatList from "./Sidebar.chatlist";
+import UserList from "./Sidebar.userlist";
 
 function Sidebar() {
+	const { currentUser } = useContext(AuthContext);
+	const [userList, setuserList] = useState([]);
+	const [isSearch, setIsSearch] = useState(false);
+
+	const searchHandler = async (evt) => {
+		const value = evt.target.value;
+		if (value === "") {
+			setIsSearch(false);
+		} else {
+			try {
+				const users = await searchMatchUsers(value);
+				setuserList(
+					users.filter((user) => user.uid !== currentUser.uid)
+				);
+				setIsSearch(true);
+			} catch (err) {
+				alert(err.message);
+			}
+		}
+	};
+
 	return (
 		<div className='sidebar'>
 			<Navbar />
 			<div className='search'>
-				<input type='search' placeholder='Find a user' />
+				<input
+					type='search'
+					placeholder='Enter username to find a user...'
+					onChange={searchHandler}
+				/>
 			</div>
-			<ul className='user-list'>
-				<li className='user active'>
-					<img src={Avatar} />
-					<span>
-						<p className='username'>monkey99</p>
-						<p className='message'>ok, I'll get back later. </p>
-					</span>
-				</li>
-				<li className='user'>
-					<img src={Avatar} />
-					<span>
-						<p className='username'>monkey99</p>
-						<p className='message'>ok, I'll get back later. </p>
-					</span>
-				</li>
-				<li className='user'>
-					<img src={Avatar} />
-					<span>
-						<p className='username'>monkey99</p>
-						<p className='message'>ok, I'll get back later. </p>
-					</span>
-				</li>
-				<li className='user'>
-					<img src={Avatar} />
-					<span>
-						<p className='username'>monkey99</p>
-						<p className='message'>ok, I'll get back later. </p>
-					</span>
-				</li>
-				<li className='user'>
-					<img src={Avatar} />
-					<span>
-						<p className='username'>monkey99</p>
-						<p className='message'>ok, I'll get back later. </p>
-					</span>
-				</li>
-				<li className='user'>
-					<img src={Avatar} />
-					<span>
-						<p className='username'>monkey99</p>
-						<p className='message'>ok, I'll get back later. </p>
-					</span>
-				</li>
-			</ul>
+			<div className='list'>
+				{isSearch && <UserList users={userList} />}
+				<ChatList isSearch={isSearch} />
+			</div>
 		</div>
 	);
 }
