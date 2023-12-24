@@ -28,6 +28,12 @@ function ChatTextToolbar() {
 		setImg(evt.target.files[0]);
 	};
 
+	const clickHandler = (evt) => {
+		if (text.length === 0 && !img) {
+			evt.preventDefault();
+		}
+	};
+
 	const submitHandler = async (evt) => {
 		evt.preventDefault();
 		try {
@@ -73,7 +79,10 @@ function ChatTextToolbar() {
 					<label htmlFor='attach'>
 					</label>*/}
 					<img src={Attach} />
-					<button id='send-message' type='submit'>
+					<button
+						id='send-message'
+						type='submit'
+						onClick={clickHandler}>
 						<img
 							className='send'
 							src={onNightMode ? SendNight : SendDay}

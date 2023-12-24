@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from "react";
+import { useContext } from "react";
 import Avatar from "../img/avatar.jpg";
 import { AuthContext } from "../contexts/auth.context";
 import { ChatContext } from "../contexts/chat.context";
@@ -9,12 +9,6 @@ function Message({ message }) {
 	const isMsgOwner = currentUser.uid === message.senderId;
 	const avatar =
 		`${isMsgOwner ? currentUser.photoURL : data.user.photoURL}` || Avatar;
-
-	const ref = useRef();
-
-	useEffect(() => {
-		ref.current?.scrollIntoView({ behavior: "smooth" });
-	}, [message]);
 
 	const getTime = (date) => {
 		const t = date.toDate();
@@ -29,7 +23,7 @@ function Message({ message }) {
 	};
 
 	return (
-		<div ref={ref} className={`message ${isMsgOwner ? "owner" : ""}`}>
+		<div className={`message ${isMsgOwner ? "owner" : ""}`}>
 			<img className='avatar' src={avatar} />
 			<span className='msg'>
 				<p className='time'>{getTime(message.date)}</p>
