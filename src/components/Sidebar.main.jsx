@@ -19,7 +19,7 @@ function Sidebar() {
 				currentUser.uid,
 				(doc) => {
 					setChats(
-						Object.entries(doc.data()).sort(
+						Object?.entries(doc.data()).sort(
 							(a, b) => b[1].date - a[1].date
 						)
 					);

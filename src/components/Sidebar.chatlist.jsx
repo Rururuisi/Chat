@@ -32,14 +32,14 @@ function ChatList({ isSearch = false, chats = [] }) {
 					<li
 						key={chat[0]}
 						className={`user ${
-							userInfo?.uid === selectedChat && "active"
+							userInfo.uid === selectedChat && "active"
 						}`}
 						onClick={() => selectHandler(userInfo)}>
 						<div>
-							<img src={userInfo?.photoURL || Avatar} />
+							<img src={userInfo.photoURL || Avatar} />
 							<span>
 								<p className='username'>
-									{userInfo?.displayName}
+									{userInfo.displayName}
 								</p>
 								<p className='message'>
 									{lastMessage?.text || ""}
