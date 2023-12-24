@@ -1,3 +1,53 @@
+#image-control {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 30%;
+	margin: 0 auto;
+	padding: 40px 40px 30px 40px;
+	max-width: 300px;
+	max-height: 500px;
+	color: #ddd;
+	background-color: #2a2a2a;
+	box-shadow: 0px 2px 30px rgba(255, 255, 255, 0.1);
+	z-index: 10;
+
+	img {
+		max-width: 200px;
+		max-height: 200px;
+		border: 2px solid rgb(255, 255, 255);
+		border-radius: 5px;
+	}
+
+	div {
+		display: flex;
+		align-items: center;
+		gap: 30px;
+		margin-top: 40px;
+
+		button {
+			width: 80px;
+			height: 30px;
+			line-height: 30px;
+			border: none;
+			border-radius: 6px;
+			cursor: pointer;
+
+			&:hover {
+				scale: 1.1;
+			}
+		}
+
+		.send-btn {
+			color: #fff;
+			background-color: #725aa0;
+		}
+	}
+}
+
 .chat {
 	background-color: #3d3d3d;
 	display: flex;

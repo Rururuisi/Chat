@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "../contexts/theme.context";
 import { AuthContext } from "../contexts/auth.context";
 import { ChatContext } from "../contexts/chat.context";
@@ -11,6 +11,7 @@ import Img from "../img/img.png";
 import Attach from "../img/attach.png";
 import SendDay from "../img/send-day.png";
 import SendNight from "../img/send-night.png";
+import ImageControl from "./Chat.imageControl";
 
 function ChatTextToolbar() {
 	const { onNightMode } = useContext(ThemeContext);
@@ -19,6 +20,8 @@ function ChatTextToolbar() {
 
 	const [text, setText] = useState([]);
 	const [img, setImg] = useState("");
+	const [imgUrl, setImageUrl] = useState("");
+	const [onImgCtrlPannel, setOnImgCtrlPannel] = useState(false);
 
 	const textChangeHanlder = (evt) => {
 		setText((evt.target.value + " ").split(/(\n)/g));
@@ -26,6 +29,8 @@ function ChatTextToolbar() {
 
 	const imgChangeHandler = (evt) => {
 		setImg(evt.target.files[0]);
+		setImageUrl(URL.createObjectURL(evt.target.files[0]));
+		evt.target.files[0] && setOnImgCtrlPannel(true);
 	};
 
 	const clickHandler = (evt) => {
@@ -36,6 +41,7 @@ function ChatTextToolbar() {
 
 	const submitHandler = async (evt) => {
 		evt.preventDefault();
+		setOnImgCtrlPannel(false);
 		try {
 			await updateChatsDoc(data.chatId, currentUser.uid, text, img);
 			await updateUserChatsDocLastMsg(
@@ -56,8 +62,20 @@ function ChatTextToolbar() {
 		}
 	};
 
+	const cancleImageHandler = (evt) => {
+		setOnImgCtrlPannel(false);
+		setImg(null);
+		setImageUrl("");
+	};
+
 	return (
 		<form className='chat-text-toolbar' onSubmit={submitHandler}>
+			{onImgCtrlPannel && (
+				<ImageControl
+					image={imgUrl}
+					cancelHandler={cancleImageHandler}
+				/>
+			)}
 			<ChatTextarea text={text} changeHandler={textChangeHanlder} />
 			<div className='btn-container'>
 				<div className='btn-group'>
@@ -65,7 +83,7 @@ function ChatTextToolbar() {
 						type='file'
 						id='img'
 						style={{ display: "none" }}
-						onChange={imgChangeHandler}
+						onInput={imgChangeHandler}
 						accept='image/*'
 					/>
 					<label htmlFor='img'>
