@@ -12,8 +12,8 @@ function Messages() {
 	const ref = useRef();
 
 	useEffect(() => {
-		ref.current.scrollIntoView({ behavior: "smooth" });
-	});
+		ref.current.scrollTop = ref.current.scrollHeight;
+	}, [messages]);
 
 	useEffect(() => {
 		const getMessages = () => {
@@ -29,12 +29,11 @@ function Messages() {
 
 	return (
 		<div className='messages'>
-			<div className='container'>
+			<div ref={ref} className='container'>
 				{messages.length > 0 &&
 					messages.map((msg, idx) => (
 						<Message key={idx} message={msg} />
 					))}
-				<div ref={ref}></div>
 			</div>
 		</div>
 	);
