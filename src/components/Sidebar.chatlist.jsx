@@ -26,34 +26,30 @@ function ChatList({ isSearch = false, chats = [] }) {
 			{!isSearch && chats.length === 0 && (
 				<p className='empty-list'>Empty</p>
 			)}
-			{chats
-				.sort((a, b) => b[1].date - a[1].date)
-				.map((chat) => {
-					const { lastMessage, date, userInfo } = chat[1];
-					return (
-						<li
-							key={chat[0]}
-							className={`user ${
-								userInfo.uid === selectedChat && "active"
-							}`}
-							onClick={() => selectHandler(userInfo)}>
-							<div>
-								<img src={userInfo.photoURL || Avatar} />
-								<span>
-									<p className='username'>
-										{userInfo.displayName}
-									</p>
-									<p className='message'>
-										{lastMessage?.text || ""}
-									</p>
-								</span>
-							</div>
-							<div id='chat-list-time'>
-								{date && getTime(date)}
-							</div>
-						</li>
-					);
-				})}
+			{chats.map((chat) => {
+				const { lastMessage, date, userInfo } = chat[1];
+				return (
+					<li
+						key={chat[0]}
+						className={`user ${
+							userInfo.uid === selectedChat && "active"
+						}`}
+						onClick={() => selectHandler(userInfo)}>
+						<div>
+							<img src={userInfo.photoURL || Avatar} />
+							<span>
+								<p className='username'>
+									{userInfo.displayName}
+								</p>
+								<p className='message'>
+									{lastMessage?.text || ""}
+								</p>
+							</span>
+						</div>
+						<div id='chat-list-time'>{date && getTime(date)}</div>
+					</li>
+				);
+			})}
 		</ul>
 	);
 }

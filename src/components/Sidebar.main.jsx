@@ -18,7 +18,11 @@ function Sidebar() {
 			const unsubscribe = onUserChatsSnapshotListener(
 				currentUser.uid,
 				(doc) => {
-					setChats(Object.entries(doc.data()));
+					setChats(
+						Object.entries(doc.data()).sort(
+							(a, b) => b[1].date - a[1].date
+						)
+					);
 				}
 			);
 			return unsubscribe;
