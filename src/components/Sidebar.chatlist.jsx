@@ -18,7 +18,7 @@ function ChatList({ isSearch = false, chats = [] }) {
 		const isToday = t.getDate() === new Date().getDate();
 		const timeStr = `${t.toLocaleTimeString([], { timeStyle: "short" })}`;
 		const dateStr = `${t.toLocaleDateString()}`;
-		return dateStr;
+		return isToday ? timeStr : dateStr;
 	};
 
 	return (
