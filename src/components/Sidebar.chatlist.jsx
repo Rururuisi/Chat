@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ChatContext } from "../contexts/chat.context";
 
 import Avatar from "../img/avatar.jpg";
@@ -8,9 +8,17 @@ function ChatList({ isSearch = false, chats = [] }) {
 
 	const [selectedChat, setSelectedChat] = useState("");
 
-	const selectHandler = (chatIdx, userInfo) => {
-		setSelectedChat(chatIdx);
+	const selectHandler = (userInfo) => {
+		setSelectedChat(userInfo.uid);
 		dispatch({ type: ActionType.CHANGE_USER, payload: userInfo });
+	};
+
+	const getTime = (date) => {
+		const t = date.toDate();
+		const isToday = t.getDate() === new Date().getDate();
+		const timeStr = `${t.toLocaleTimeString([], { timeStyle: "short" })}`;
+		const dateStr = `${t.toLocaleDateString()}`;
+		return isToday ? timeStr : dateStr;
 	};
 
 	return (
@@ -18,27 +26,34 @@ function ChatList({ isSearch = false, chats = [] }) {
 			{!isSearch && chats.length === 0 && (
 				<p className='empty-list'>Empty</p>
 			)}
-			{chats.map((chat, idx) => {
-				const { date, userInfo } = chat[1];
-				return (
-					<li
-						key={chat[0]}
-						className={`user ${idx === selectedChat && "active"}`}
-						onClick={() => selectHandler(idx, userInfo)}>
-						<div>
-							<img src={userInfo.photoURL || Avatar} />
-							<span>
-								<p className='username'>
-									{userInfo.displayName}
-								</p>
-								<p className='message'>
-									ok, I'll get back later.{" "}
-								</p>
-							</span>
-						</div>
-					</li>
-				);
-			})}
+			{chats
+				.sort((a, b) => b[1].date - a[1].date)
+				.map((chat) => {
+					const { lastMessage, date, userInfo } = chat[1];
+					return (
+						<li
+							key={chat[0]}
+							className={`user ${
+								userInfo.uid === selectedChat && "active"
+							}`}
+							onClick={() => selectHandler(userInfo)}>
+							<div>
+								<img src={userInfo.photoURL || Avatar} />
+								<span>
+									<p className='username'>
+										{userInfo.displayName}
+									</p>
+									<p className='message'>
+										{lastMessage?.text || ""}
+									</p>
+								</span>
+							</div>
+							<div id='chat-list-time'>
+								{date && getTime(date)}
+							</div>
+						</li>
+					);
+				})}
 		</ul>
 	);
 }

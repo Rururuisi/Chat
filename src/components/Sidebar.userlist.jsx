@@ -4,7 +4,7 @@ import {
 	combineId,
 	findDocData,
 	addChatToDoc,
-	updateUserChatsDoc,
+	updateUserChatsDocInitial,
 } from "../firebase/firebase.firestore";
 import Avatar from "../img/avatar.jpg";
 
@@ -22,7 +22,7 @@ function UserList({ users = [], isAddedFunc }) {
 			const chat = await findDocData("chats", chatId);
 			if (!chat) {
 				await addChatToDoc(chatId);
-				await updateUserChatsDoc(currentUser.uid, {
+				await updateUserChatsDocInitial(currentUser.uid, {
 					chatId,
 					...userInfo,
 				});

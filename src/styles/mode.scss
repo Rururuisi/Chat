@@ -10,6 +10,7 @@ body:has(#light){
 	}
 
 	#light {
+
 		.sidebar {
 			background-color: #eee;
 			border-right: 1px solid #eee;
@@ -73,6 +74,9 @@ body:has(#light){
 		}
 
 		.chat {
+			border-left: 1px solid #ddd;
+			background-color: #eaeaea;
+
 			.chat-navbar {
 				background-color: #382e60;
 			}
@@ -96,7 +100,7 @@ body:has(#light){
 			}
 
 			.time {
-				color: black;
+				color: #444;
 			}
 		}
 	}

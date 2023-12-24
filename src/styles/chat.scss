@@ -46,15 +46,15 @@
 						max-width: 60%;
 
 						.time {
-							font-size: 12px;
-							color: #fff;
+							font-size: 10px;
+							color: #aaa;
 						}
 						
 						.bubble {
 							margin-top: 10px;
 							padding: 10px;
 							font-size: 14px;
-							text-align: justify;
+							line-height: 18px;
 							color: #000;
 							background-color: #fff;
 							border-radius: 0 10px 10px 10px;
@@ -68,10 +68,10 @@
 				}
 			}
 
-			.container:has(.receiver) {
+			.container:has(.owner) {
 				align-items: end;
 
-				.receiver {
+				.owner {
 					flex-direction: row-reverse;
 
 					.msg {
@@ -107,6 +107,7 @@
 				max-height: 300px;
 				padding: 20px;
 				font-size: 16px;
+				line-height: 22px;
 				overflow: hidden;
 			}
 			
@@ -123,6 +124,7 @@
 					height: 100%;
 					padding: 6px;
 					font-size: 16px;
+					line-height: 22px;
 					border-radius: 5px;
 					border: none;
 					resize: none;

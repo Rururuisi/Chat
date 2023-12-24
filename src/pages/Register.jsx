@@ -33,7 +33,7 @@ function Register() {
 					/>
 					<input type='email' placeholder='email' required />
 					<input type='password' placeholder='password' required />
-					<input type='file' id='file' />
+					<input type='file' id='file' accept='image/*' />
 					<label htmlFor='file' className='avatar-btn'>
 						<img src={AddAvatar} />
 						<span>Add an avatar</span>

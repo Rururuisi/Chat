@@ -23,7 +23,11 @@ const createUser = async (displayName, email, password, avatar) => {
 		);
 		const user = userCredential.user;
 		if (avatar) {
-			user.photoURL = await uploadAvatar(user.uid, avatar);
+			const photoURL = await uploadAvatar(
+				user.displayName + user.uid,
+				avatar
+			);
+			user.photoURL = photoURL;
 		}
 		user.displayName = displayName;
 		await updateUserProfile(user);

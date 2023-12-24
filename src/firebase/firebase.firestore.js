@@ -11,8 +11,12 @@ import {
 	updateDoc,
 	serverTimestamp,
 	onSnapshot,
+	arrayUnion,
+	Timestamp,
 } from "firebase/firestore";
 import { dbErrorHandler, storageErrorHandler } from "./filebase.error";
+import { v4 as uuid } from "uuid";
+import { uploadMessageImage } from "./firebase.storage";
 
 // Initialize Cloud Firestore and get a reference to the service
 const db = getFirestore(app);
@@ -49,14 +53,18 @@ const addChatToDoc = async (chatId, chat = { messages: [] }) => {
 };
 
 const searchMatchUsers = async (displayName) => {
-	return await searchMatchData("users", "displayName", displayName);
+	try {
+		return await searchMatchData("users", "displayName", displayName);
+	} catch (err) {
+		dbErrorHandler(err);
+	}
 };
 
-const searchMatchData = async (collectionName, field, displayName) => {
+const searchMatchData = async (collectionName, field, value) => {
 	try {
 		const q = query(
 			collection(db, collectionName),
-			where(field, "==", displayName)
+			where(field, "==", value)
 		);
 		const snapshot = await getDocs(q);
 		const data = [];
@@ -86,18 +94,60 @@ const findDocData = async (collectionName, uid) => {
 	}
 };
 
-const updateUserChatsDoc = async (
-	currentUserId,
+const updateUserChatsDocInitial = async (
+	objectUserId,
 	{ chatId, userId, displayName, photoURL }
 ) => {
-	await updateDoc(doc(db, "userChats", currentUserId), {
+	const data = {
 		[`${chatId}.userInfo`]: {
 			uid: userId,
 			displayName,
 			photoURL,
 		},
 		[`${chatId}.date`]: serverTimestamp(),
-	});
+	};
+	await updateUserChatsDoc(objectUserId, data);
+};
+
+const updateUserChatsDocLastMsg = async (objectUserId, chatId, lastMessage) => {
+	const data = {
+		[`${chatId}.lastMessage`]: { text: lastMessage },
+		[`${chatId}.date`]: serverTimestamp(),
+	};
+	await updateUserChatsDoc(objectUserId, data);
+};
+
+const updateUserChatsDoc = async (objectUserId, data) => {
+	try {
+		await updateDoc(doc(db, "userChats", objectUserId), data);
+	} catch (err) {
+		dbErrorHandler(err);
+	}
+};
+
+const updateChatsDoc = async (chatId, senderId, text, img) => {
+	const messageData = {
+		id: uuid(),
+		text,
+		senderId,
+		date: Timestamp.now(),
+	};
+	try {
+		if (img) {
+			const url = await uploadMessageImage(
+				chatId,
+				`${img.name}-${messageData.id}`,
+				img
+			);
+			messageData.imageURL = url;
+		}
+
+		await updateDoc(doc(db, "chats", chatId), {
+			messages: arrayUnion(messageData),
+		});
+	} catch (err) {
+		dbErrorHandler(err);
+	}
 };
 
 const onUserChatsSnapshotListener = (currentUserId, callback) =>
@@ -116,7 +166,9 @@ export {
 	addChatToDoc,
 	searchMatchUsers,
 	findDocData,
-	updateUserChatsDoc,
+	updateUserChatsDocInitial,
+	updateUserChatsDocLastMsg,
+	updateChatsDoc,
 	onUserChatsSnapshotListener,
 	onChatsSnapshotListener,
 	combineId,

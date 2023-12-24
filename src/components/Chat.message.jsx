@@ -1,17 +1,48 @@
-import React from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import Avatar from "../img/avatar.jpg";
+import { AuthContext } from "../contexts/auth.context";
+import { ChatContext } from "../contexts/chat.context";
 
-function Message({ message, isReceiver = false }) {
+function Message({ message }) {
+	const { currentUser } = useContext(AuthContext);
+	const { data } = useContext(ChatContext);
+	const isMsgOwner = currentUser.uid === message.senderId;
+	const avatar =
+		`${isMsgOwner ? currentUser.photoURL : data.user.photoURL}` || Avatar;
+
+	const ref = useRef();
+
+	useEffect(() => {
+		ref.current?.scrollIntoView({ behavior: "smooth" });
+	}, [message]);
+
+	const getTime = (date) => {
+		const t = date.toDate();
+		const dateStr = `${t.toLocaleString([], {
+			year: "numeric",
+			month: "2-digit",
+			day: "2-digit",
+			hour: "2-digit",
+			minute: "2-digit",
+		})}`;
+		return dateStr;
+	};
+
 	return (
-		<div className={`message ${isReceiver ? "receiver" : ""}`}>
-			<img className='avatar' src={Avatar} />
+		<div ref={ref} className={`message ${isMsgOwner ? "owner" : ""}`}>
+			<img className='avatar' src={avatar} />
 			<span className='msg'>
-				<p className='time'>just now</p>
-				<p className='bubble'>Hello! Can you do me a favor?</p>
-				<img
-					className='picture'
-					src='https://res.cloudinary.com/scribe-publications/image/upload/w_800,/v1661532377/newcovers/9781922310859_rev.jpg'
-				/>
+				<p className='time'>{getTime(message.date)}</p>
+				{message.text.length > 0 && (
+					<div className='bubble'>
+						{message.text.map((txt, id) => (
+							<p key={id}>{txt}</p>
+						))}
+					</div>
+				)}
+				{message.imageURL && (
+					<img className='picture' src={message.imageURL} />
+				)}
 			</span>
 		</div>
 	);

@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import { Fragment } from "react";
 
 function ChatTextarea({ text = [], changeHandler }) {
 	const keyDownHandler = (evt) => {

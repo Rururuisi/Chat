@@ -21,8 +21,6 @@ function Messages() {
 		chatId && getMessages();
 	}, [chatId]);
 
-	console.log(messages);
-
 	return (
 		<div className='messages'>
 			<div className='container'>
