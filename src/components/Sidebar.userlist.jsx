@@ -11,20 +11,29 @@ import Avatar from "../img/avatar.jpg";
 function UserList({ users = [], isAddedFunc }) {
 	const { currentUser } = useContext(AuthContext);
 
+	const getUserInfo = (uid, displayName, photoURL) => ({
+		userId: uid,
+		displayName,
+		photoURL,
+	});
+
 	const addChat = async (user) => {
 		const chatId = combineId(user.uid, currentUser.uid);
-		const userInfo = {
-			userId: user.uid,
-			displayName: user.displayName,
-			photoURL: user.photoURL,
-		};
 		try {
 			const chat = await findDocData("chats", chatId);
 			if (!chat) {
 				await addChatToDoc(chatId);
 				await updateUserChatsDocInitial(currentUser.uid, {
 					chatId,
-					...userInfo,
+					...getUserInfo(user.uid, user.displayName, user.photoURL),
+				});
+				await updateUserChatsDocInitial(user.uid, {
+					chatId,
+					...getUserInfo(
+						currentUser.uid,
+						currentUser.displayName,
+						currentUser.photoURL
+					),
 				});
 			}
 		} catch (err) {
