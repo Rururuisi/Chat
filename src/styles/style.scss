@@ -195,6 +195,11 @@ input:focus, textarea:focus, button:focus {
 				align-items: center;
 				gap: 10px;
 
+				span {
+					height: 20px;
+					overflow: hidden;
+				}
+
 				.btn {
 					height: 30px;
 					background-color: transparent;

@@ -93,15 +93,17 @@
 						padding-right: 10px;
 						
 						.username {
+							height: 20px;
 							font-size: 16px;
+							overflow: hidden;
 						}
 						
 						.message {
 							margin-top: 6px;
 							font-size: 12px;
 							color: #aaa;
-							overflow: hidden;
 							max-height: 14px;
+							overflow: hidden;
 						}
 					}
 	
