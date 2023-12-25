@@ -72,7 +72,14 @@
 .chat {
 	display: flex;
 	flex-direction: column;
-	flex: 2;
+	flex: 65%;
+	@include increase-sidebar {
+		flex: 60%;
+	}
+	@include tablet {
+		display: none;
+		flex: 1;
+	}
 
 	.no-chat-open {
 		display: flex;

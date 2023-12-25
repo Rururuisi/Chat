@@ -1,18 +1,18 @@
 @use "sass:map";
 
-@mixin mobile {
-	@media screen and (max-width: 480px) {
-		@content;
-	}
-}
-
 @mixin tablet {
 	@media screen and (max-width: 768px) {
 		@content;
 	}
 }
 
-@mixin labtop {
+@mixin increase-sidebar {
+	@media screen and (max-width: 900px) {
+		@content;
+	}
+}
+
+@mixin fullscreen {
 	@media screen and (max-width: 1200px) {
 		@content;
 	}

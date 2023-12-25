@@ -11,9 +11,16 @@
 }
 
 .sidebar {
-	flex: 1;
+	flex: 35%;
 	padding-bottom: 6px;
 	border-right: 1px solid #444;
+	@include increase-sidebar {
+		flex: 40%;
+	}
+	@include tablet {
+		flex: 1;
+		border: none;
+	}
 
 	.search {
 		width: 100%;
