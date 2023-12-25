@@ -9,7 +9,7 @@ function Home() {
 
 	return (
 		<ChatContextProvider>
-			<div className='home' id={`${onNightMode ? "night" : "light"}`}>
+			<div className='home' id={`${onNightMode ? "dark" : "light"}`}>
 				<div className='container'>
 					<Sidebar />
 					<Chat />

@@ -1,0 +1,113 @@
+@use "sass:map";
+
+@mixin mobile {
+	@media screen and (max-width: 480px) {
+		@content;
+	}
+}
+
+@mixin tablet {
+	@media screen and (max-width: 768px) {
+		@content;
+	}
+}
+
+@mixin labtop {
+	@media screen and (max-width: 1200px) {
+		@content;
+	}
+}
+
+@mixin button-btn {
+	color: rgb(228, 214, 253);
+	background-color: #6d619c;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+
+	&:hover {
+		scale: 1.1;
+		background-color: #524684;
+	}
+}
+
+@mixin icon-btn {
+	width: 30px;
+	cursor: pointer;
+
+	&:hover {
+		scale: 1.1;
+	}
+}
+
+
+
+// ----------------Theme Color-------------------
+
+@function color-light($key) {
+	@return map.get($theme-map-light, $key);
+}
+
+@function color-dark($key) {
+	@return map.get($theme-map-dark, $key);
+}
+
+
+$--body-day-bgc: #acbbf8;
+$--body-night-bgc: linear-gradient(#3127be, #7d58c2, #3127be);
+
+$theme-map-light: (
+	"$--light-font-color": #888,
+
+	//sidebar
+	"$--nav-bgc": #3c2763,
+	"$--sidebar-bgc": #eee,
+	"$--sidebar-border-right-color": #ddd,
+	"$--sidebar-searchbox-bgc": #e3e1e8,
+	"$--sidebar-searchbox-color": #333,
+	"$--sidebar-searchbox-caret-color": #333,
+	"$--empty-notfound-font-color": #aaa,
+	"$--username-color": #000,
+	"$--user-bgc": #ddd,
+	"$--active-user-bgc": #ccc,
+
+	// chat
+	"$--chat-bgc": #dddde4,
+	"$--chat-display-word-when-no-chat-open": #666,
+	"$--chat-message-time": #444,
+	"$--chat-bubble-non-owner-color": #000,
+	"$--chat-bubble-non-owner-bgc": #eee,
+	"$--chat-bubble-owner-color": #fff,
+	"$--chat-bubble-owner-bgc": #6d619c,
+	"$--chat-text-toolbar-bgc": #382e60,
+	"$--chat-textarea-box-color": #000,
+	"$--chat-textarea-box-bgc": #fff,
+	);
+
+	
+$theme-map-dark: (
+	"$--light-font-color": #aaa,
+
+	// sidebar
+	"$--nav-bgc": #2a2a2a,
+	"$--sidebar-bgc": #2a2a2a,
+	"$--sidebar-searchbox-bgc": #444,
+	"$--sidebar-searchbox-color": #fff,
+	"$--sidebar-searchbox-caret-color": #fff,
+	"$--empty-notfound-font-color": #555,
+	"$--username-color": #fff,
+	"$--user-bgc": #333,
+	"$--active-user-bgc": #544d62,
+
+	// chat
+	"$--chat-bgc": #3d3d3d,
+	"$--chat-display-word-when-no-chat-open": #666,
+	"$--chat-message-time": #aaa,
+	"$--chat-bubble-non-owner-color": #000,
+	"$--chat-bubble-non-owner-bgc": #eee,
+	"$--chat-bubble-owner-color": #fff,
+	"$--chat-bubble-owner-bgc": #6d619c,
+	"$--chat-text-toolbar-bgc": #2a2a2a,
+	"$--chat-textarea-box-color": #fff,
+	"$--chat-textarea-box-bgc": #555,
+);

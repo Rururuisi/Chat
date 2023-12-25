@@ -50,7 +50,7 @@ function UserList({ users = [], isAddedFunc }) {
 						<img src={user.photoURL || Avatar} />
 						<span>
 							<p className='username'>{user.displayName}</p>
-							<p className='message'>ok, I'll get back later. </p>
+							{/*<p className='message'>ok, I'll get back later. </p>*/}
 						</span>
 					</div>
 					<div>

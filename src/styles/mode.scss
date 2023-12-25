@@ -1,107 +1,136 @@
-// ------------------------Light Mode-------------------------
+@import "./variables.scss";
 
-
-body:has(#light){
-	background: #acbbf8;
-
-	.container {
-		box-shadow: none;
-
+#light {
+	// sidebar
+	.sidebar-navbar, .chat-navbar {
+		background-color: color-light("$--nav-bgc");
+	}
+	.sidebar{
+		background-color: color-light("$--sidebar-bgc");
+		border-right-color: color-light("$--sidebar-border-right-color");
+	}
+	.search input {
+		background-color: color-light("$--sidebar-searchbox-bgc");
+	}
+	.search input {
+		color: color-light("$--sidebar-searchbox-color");
+		background-color: color-light("$--sidebar-searchbox-bgc");
+		caret-color: color-light("$--sidebar-searchbox-caret-color");
+		&::placeholder {
+			color: color-light("$--light-font-color");
+		}
+	}
+	.empty-list, .not-found {
+		color: color-light("$--empty-notfound-font-color");
+	}
+	.user .message {
+		color: color-light("$--light-font-color");
+	}
+	.user {
+		color: color-light("$--username-color");
+		&:hover {
+			background-color: color-light(("$--user-bgc"));
+		}
+	}
+	.user.active {
+		background-color: color-light("$--active-user-bgc");
+		&:hover {
+			background-color: color-light("$--active-user-bgc");
+		}
 	}
 
-	#light {
-
-		.sidebar {
-			background-color: #eee;
-			border-right: 1px solid #eee;
-
-			.sidebar-navbar {
-				background-color: #382e60;
-			}
-
-			.search input {
-				color: #333;
-				background-color: #e2e1e7;
-				caret-color: #333;
-
-				&::placeholder {
-					color: #888;
-				}
-			}
-
-			.user-list{
-				.empty-list, .not-found {
-					color: #aaa;
-				}
-				
-				.user {
-					color: #000;
-					background-color: transparent;
-					cursor: default;
-	
-					.message {
-						color: #555;
-					}
-				}
-			}
-
-			.user-list.search {
-				border-bottom: 1px solid #ccc;
-			}
-
-			.user-list.chatlist {
-				.user {
-					cursor: pointer;
-
-					&:hover {
-						background-color: #ddd;
-					}
-				}
-			}
-
-			.user-list .user.active {
-				color: #000;
-				background-color: #ccc;
-				
-				&:hover {
-					background-color: #ccc;
-				}
-
-				.message {
-					color: #555;
-				}
-			}
-		}
-
-		.chat {
-			border-left: 1px solid #ddd;
-			background-color: #eaeaea;
-
-			.chat-navbar {
-				background-color: #382e60;
-			}
-
-			.chat-window {
-				background-color: #dddde3;
-
-				.container {
-					background-color: #dddde3;
-				}
-			}
-
-			.chat-text-toolbar {
-				background-color: #382e60;
-				
-				textarea {
-					color: #000;
-					background-color: #fff;
-					caret-color: #000;
-				}
-			}
-
-			.time {
-				color: #444;
-			}
+	//chat
+	.chat {
+		background-color: color-light("$--chat-bgc");
+	}
+	.no-chat-open {
+		color: color-light("$--chat-display-word-when-no-chat-open");
+	}
+	.msg .time{
+		color: color-light("$--chat-message-time");
+	}
+	.msg .bubble {
+		color: color-light("$--chat-bubble-non-owner-color");
+		background-color: color-light("$--chat-bubble-non-owner-bgc");
+	}
+	.owner .msg .bubble {
+		color: color-light("$--chat-bubble-owner-color");
+		background-color: color-light("$--chat-bubble-owner-bgc");
+	}
+	.chat-text-toolbar {
+		background-color: color-light("$--chat-text-toolbar-bgc");
+		textarea {
+			color: color-light("$--chat-textarea-box-color");
+			caret-color: color-light("$--chat-textarea-box-color");
+			background-color: color-light("$--chat-textarea-box-bgc");
 		}
 	}
 }
+
+
+#dark {
+	// sidebar
+	.sidebar-navbar, .chat-navbar {
+		background-color: color-dark("$--nav-bgc");
+	}
+	.sidebar{
+		background-color: color-dark("$--sidebar-bgc");
+	}
+	.search input {
+		background-color: color-dark("$--sidebar-searchbox-bgc");
+	}
+	.search input {
+		color: color-dark("$--sidebar-searchbox-color");
+		background-color: color-dark("$--sidebar-searchbox-bgc");
+		caret-color: color-dark("$--sidebar-searchbox-caret-color");
+		&::placeholder {
+			color: color-dark("$--light-font-color");
+		}
+	}
+	.empty-list, .not-found {
+		color: color-dark("$--empty-notfound-font-color");
+	}
+	.user .message {
+		color: color-dark("$--light-font-color");
+	}
+	.user {
+		color: color-dark("$--username-color");
+		&:hover {
+			background-color: color-dark(("$--user-bgc"));
+		}
+	}
+	.user.active {
+		background-color: color-dark("$--active-user-bgc");
+		&:hover {
+			background-color: color-dark("$--active-user-bgc");
+		}
+	}
+
+	//chat
+	.chat {
+		background-color: color-dark("$--chat-bgc");
+	}
+	.no-chat-open {
+		color: color-dark("$--chat-display-word-when-no-chat-open");
+	}
+	.msg .time{
+		color: color-dark("$--chat-message-time");
+	}
+	.msg .bubble {
+		color: color-dark("$--chat-bubble-non-owner-color");
+		background-color: color-dark("$--chat-bubble-non-owner-bgc");
+	}
+	.owner .msg .bubble {
+		color: color-dark("$--chat-bubble-owner-color");
+		background-color: color-dark("$--chat-bubble-owner-bgc");
+	}
+	.chat-text-toolbar {
+		background-color: color-dark("$--chat-text-toolbar-bgc");
+		textarea {
+			color: color-dark("$--chat-textarea-box-color");
+			caret-color: color-dark("$--chat-textarea-box-color");
+			background-color: color-dark("$--chat-textarea-box-bgc");
+		}
+	}
+}
+
