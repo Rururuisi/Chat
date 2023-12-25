@@ -23,6 +23,9 @@
 	.empty-list, .not-found {
 		color: color-light("$--empty-notfound-font-color");
 	}
+	.user-list.search {
+		border-bottom-color: color-light("$--empty-notfound-font-color");
+	}
 	.user .message {
 		color: color-light("$--light-font-color");
 	}
