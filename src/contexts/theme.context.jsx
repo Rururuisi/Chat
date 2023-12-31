@@ -16,7 +16,7 @@ const ThemeContextProvider = ({ children }) => {
 				setWindowWidth(window.innerWidth);
 			});
 		return unsubscribe;
-	}, []);
+	});
 
 	useEffect(() => {
 		if (!onChat) {
