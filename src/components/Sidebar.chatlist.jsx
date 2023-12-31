@@ -1,23 +1,19 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { ChatContext } from "../contexts/chat.context";
 
 import Avatar from "../img/avatar.jpg";
+import { ThemeContext } from "../contexts/theme.context";
 
 function ChatList({ isSearch = false, chats = [] }) {
 	const { dispatch, ActionType } = useContext(ChatContext);
+	const { onChatSwitch } = useContext(ThemeContext);
 
 	const [selectedChat, setSelectedChat] = useState("");
 
 	const selectHandler = (userInfo) => {
 		setSelectedChat(userInfo.uid);
 		dispatch({ type: ActionType.CHANGE_USER, payload: userInfo });
-		if (window.innerWidth < 768) {
-			document.querySelector(".chat").style.display = "flex";
-			document.querySelector(".sidebar").style.display = "none";
-		} else {
-			document.querySelector(".chat").style.display = "flex";
-			document.querySelector(".sidebar").style.display = "block";
-		}
+		onChatSwitch(true);
 	};
 
 	const getTime = (date) => {

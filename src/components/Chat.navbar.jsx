@@ -1,24 +1,21 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import Add from "../img/add.png";
 import Vedio from "../img/cam.png";
 import More from "../img/more.png";
 import Back from "../img/back.png";
+import { ThemeContext } from "../contexts/theme.context";
 
 function ChatTopBar({ username }) {
-	const backHandler = (evt) => {
-		if (window.innerWidth < 768) {
-			document.querySelector(".chat").style.display = "none";
-			document.querySelector(".sidebar").style.display = "block";
-		} else {
-			document.querySelector(".chat").style.display = "flex";
-			document.querySelector(".sidebar").style.display = "block";
-		}
-	};
+	const { onChatSwitch } = useContext(ThemeContext);
 
 	return (
 		<div className='chat-navbar'>
 			<div className='username'>
-				<img className='btn' src={Back} onClick={backHandler} />
+				<img
+					className='btn'
+					src={Back}
+					onClick={() => onChatSwitch(false)}
+				/>
 				<span>{username}</span>
 			</div>
 			<div className='btn-group'>
